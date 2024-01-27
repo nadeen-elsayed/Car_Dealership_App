@@ -18,6 +18,7 @@
     <body>
     
     <!--Add a nav bar here -->
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Best Cars</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,9 +33,6 @@
             <li class="nav-item">
               <a class="nav-link" href="about">About</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="contact">Contact Us</a>
-              </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Dropdown
@@ -50,12 +48,35 @@
               <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+          <ul class="nav navbar-nav navbar-right">
+                
+        </li>
+        {% if user.is_authenticated %}
+        <li>
+            <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+            <a class="btn btn-link" href="#">Logout</a>
+        </li>
+        {% else %}
+        <li>
+            <form class="form-inline" action="#" method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Username" name="username" >
+                    <input type="password" class="form-control" placeholder="Password" name="psw" >
+                    <button class="btn btn-primary" type="submit">Login</button>
+                    <a class="btn btn-link" href="#">Sign Up</a>
+                </div>
+            </form>
+        </li>
+        {% endif %}
+    </ul>
         </div>
       </nav>
+
+   
+  
+    
+  
     <!--Add a dealer table here -->
 
     </body>
