@@ -99,7 +99,7 @@ h5 {
 }
 
 ul > li {
-    list-style-type: square;
+    list-style-type: none;
     padding: 1px 0;
 }
 
@@ -963,4 +963,11 @@ table#change-history tbody th {
 
 .popup #header {
     padding: 10px 20px;
+}
+li{
+    list-style-type: none;
+    text-decoration: none;
+}
+ul{
+    list-style: none;
 }
