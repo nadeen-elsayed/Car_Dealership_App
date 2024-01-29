@@ -1,6 +1,13 @@
-from django.db import models
+import sys
 from django.utils.timezone import now
+try:
+    from django.db import models
+except Exception:
+    print("There was an error loading django modules. Do you have django installed?")
+    sys.exit()
 
+from django.conf import settings
+import uuid
 
 # Create your models here.
 
@@ -50,7 +57,7 @@ class CarModel(models.Model):
 
         # Create a toString method for object string representation
     def __str__(self):
-        return "Car Name: " + self.name + " Car Type: " + self.car_type + " Year: " + self.year
+        return "Car Name: " + self.name + " Car Type: " + self.car_type 
 # <HINT> Create a plain Python class `CarDealer` to hold dealer data
 
 
