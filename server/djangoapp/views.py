@@ -113,38 +113,7 @@ def get_dealerships(request):
         return render(request, 'djangoapp/index.html', context)
 
 
-# Gets a single dealer from the Cloudant DB with the Cloud Function get-dealerships
-# Requires the dealer_id parameter with only a single value
-def get_dealer_by_id(url, dealer_id):
-    # Call get_request with the dealer_id param
-    json_result = get_request(url, dealerId=dealer_id)
 
-    # Create a CarDealer object from response
-    dealer = json_result["entries"][0]
-    dealer_obj = CarDealer(address=dealer["address"], city=dealer["city"], full_name=dealer["full_name"],
-                           id=dealer["id"], lat=dealer["lat"], long=dealer["long"],
-                           short_name=dealer["short_name"],
-                           st=dealer["st"], state=dealer["state"], zip=dealer["zip"])
-
-    return dealer_obj
-
-
-# Gets all dealers in the specified state from the Cloudant DB with the Cloud Function get-dealerships
-def get_dealers_by_state(url, state):
-    results = []
-    # Call get_request with the state param
-    json_result = get_request(url, state=state)
-    dealers = json_result["body"]["docs"]
-    # For each dealer in the response
-    for dealer in dealers:
-        # Create a CarDealer object with values in `doc` object
-        dealer_obj = CarDealer(address=dealer["address"], city=dealer["city"], full_name=dealer["full_name"],
-                               id=dealer["id"], lat=dealer["lat"], long=dealer["long"],
-                               short_name=dealer["short_name"],
-                               st=dealer["st"], state=dealer["state"], zip=dealer["zip"])
-        results.append(dealer_obj)
-
-    return results
 
 
 # Create a `get_dealer_details` view to render the reviews of a dealer
