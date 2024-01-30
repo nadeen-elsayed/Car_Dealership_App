@@ -102,8 +102,14 @@ def registration_request(request):
 
 # Update the `get_dealerships` view to render the index page with a list of dealerships
 def get_dealerships(request):
-    context = {}
     if request.method == "GET":
+        context = {}
+        # Get dealers from the Cloudant DB
+        context["dealerships"] = get_dealers_from_cf()
+
+        # dealer_names = ' '.join([dealer.short_name for dealer in context["dealerships"]])
+        # return HttpResponse(dealer_names)
+
         return render(request, 'djangoapp/index.html', context)
 
 

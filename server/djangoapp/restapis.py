@@ -74,15 +74,7 @@ def get_dealers_from_cf( **kwargs):
 # - Call get_request() with specified arguments
 # - Parse JSON results into a DealerView object list
 
-def get_dealerships(request):
-    if request.method == "GET":
-      
-        # Get dealers from the URL
-        dealerships = get_dealers_from_cf()
-        # Concat all dealer's short name
-        dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
-        # Return a list of dealer short name
-        return HttpResponse(dealer_names)
+
 
 # Create an `analyze_review_sentiments` method to call Watson NLU and analyze text
 # def analyze_review_sentiments(text):
