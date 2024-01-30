@@ -10,7 +10,7 @@ from requests.auth import HTTPBasicAuth
 
 import requests
 import json
-from .models import CarDealer
+from .models import CarDealer, DealerReview
 from requests.auth import HTTPBasicAuth
 
 def get_request(url, **kwargs):
@@ -127,10 +127,10 @@ def get_dealers_by_state(url, state):
 # - Parse JSON results into a DealerView object list
 # Gets all dealer reviews for a specified dealer from the Cloudant DB
 # Uses the Cloud Function get_reviews
-def get_dealer_reviews_from_cf(url, dealer_id):
+def get_dealer_reviews_from_cf(dealer_id):
     results = []
     # Perform a GET request with the specified dealer id
-    reviews = get_review_json_data(dealer_id)
+    reviews = get_reviews_json_data(dealer_id)
 
     if reviews:
      
