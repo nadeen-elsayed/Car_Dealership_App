@@ -26,6 +26,24 @@ def get_request(url, **kwargs):
     print("With status {} ".format(status_code))
     json_data = json.loads(response.text)
     return json_data
+
+
+# Function for making HTTP POST requests
+def post_request( json_payload, **kwargs):
+    
+    url = "https://apikey-v2-wztwzl2vqrjtynwzpmouki5qaykydaz5iygtyhkx3ht:40233ff7312d84b62b2a9ecc6e2b6496@b3da0739-66b0-434d-ac4e-a114108f111e-bluemix.cloudantnosqldb.appdomain.cloud/reviews/"
+
+    print(f"POST to {url}")
+    try:
+        response = requests.post(url, params=kwargs, json=json_payload)
+    except:
+        print("An error occurred while making POST request. ")
+    status_code = response.status_code
+    print(f"With status {status_code}")
+
+    return response
+
+
 # Function to get dealership data
 def get_json_data():
     URL = "https://apikey-v2-wztwzl2vqrjtynwzpmouki5qaykydaz5iygtyhkx3ht:40233ff7312d84b62b2a9ecc6e2b6496@b3da0739-66b0-434d-ac4e-a114108f111e-bluemix.cloudantnosqldb.appdomain.cloud/dealerships/"
@@ -88,12 +106,11 @@ def get_dealers_from_cf( **kwargs):
     return results
 # Gets a single dealer from the Cloudant DB with the Cloud Function get-dealerships
 # Requires the dealer_id parameter with only a single value
-def get_dealer_by_id(url, dealer_id):
+def get_dealer_by_id(dealer_id):
     # Call get_request with the dealer_id param
-    json_result = get_request(url, dealerId=dealer_id)
+    dealer = get_reviews_data_request(dealerId=dealer_id)
 
     # Create a CarDealer object from response
-    dealer = json_result["entries"][0]
     dealer_obj = CarDealer(address=dealer["address"], city=dealer["city"], full_name=dealer["full_name"],
                            id=dealer["id"], lat=dealer["lat"], long=dealer["long"],
                            short_name=dealer["short_name"],
