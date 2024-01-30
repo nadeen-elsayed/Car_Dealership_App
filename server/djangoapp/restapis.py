@@ -11,10 +11,6 @@ from ibm_watson.natural_language_understanding_v1 import Features, SentimentOpti
 # e.g., response = requests.get(url, params=params, headers={'Content-Type': 'application/json'},
 #                                     auth=HTTPBasicAuth('apikey', api_key))
 
-import requests
-import json
-from .models import CarDealer, DealerReview
-from requests.auth import HTTPBasicAuth
 
 def get_request(url, **kwargs):
     print(kwargs)
