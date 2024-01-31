@@ -28,20 +28,7 @@ def get_request(url, **kwargs):
     return json_data
 
 
-# Function for making HTTP POST requests
-def post_request( json_payload, **kwargs):
-    
-    url = "https://apikey-v2-wztwzl2vqrjtynwzpmouki5qaykydaz5iygtyhkx3ht:40233ff7312d84b62b2a9ecc6e2b6496@b3da0739-66b0-434d-ac4e-a114108f111e-bluemix.cloudantnosqldb.appdomain.cloud/reviews/"
 
-    print(f"POST to {url}")
-    try:
-        response = requests.post(url, params=kwargs, json=json_payload)
-    except:
-        print("An error occurred while making POST request. ")
-    status_code = response.status_code
-    print(f"With status {status_code}")
-
-    return response
 
 
 # Function to get dealership data
@@ -108,10 +95,10 @@ def get_dealers_from_cf( **kwargs):
 # Requires the dealer_id parameter with only a single value
 def get_dealer_by_id(dealer_id):
     # Call get_request with the dealer_id param
-    URL = "https://apikey-v2-wztwzl2vqrjtynwzpmouki5qaykydaz5iygtyhkx3ht:40233ff7312d84b62b2a9ecc6e2b6496@b3da0739-66b0-434d-ac4e-a114108f111e-bluemix.cloudantnosqldb.appdomain.cloud/reviews/"
+    URL = "https://apikey-v2-wztwzl2vqrjtynwzpmouki5qaykydaz5iygtyhkx3ht:40233ff7312d84b62b2a9ecc6e2b6496@b3da0739-66b0-434d-ac4e-a114108f111e-bluemix.cloudantnosqldb.appdomain.cloud/dealerships/"
     result = get_request(URL+'_all_docs')
     rows = result['rows']
-    dealers = []
+    the_dealers = 0
     ids = []
     for i in range(5):
         ids.append(rows[i]['id'])
@@ -120,14 +107,14 @@ def get_dealer_by_id(dealer_id):
         dealer = get_request(URL+id)
         
         
-        if dealer['id'] == rev_id:
-            dealers.append(dealer)
+        if dealer['id'] == dealer_id:
+            the_dealer = dealer
 
     # Create a CarDealer object from response
-    dealer_obj = CarDealer(address=dealers["address"], city=dealers["city"], full_name=dealers["full_name"],
-                           id=dealers["id"], lat=dealers["lat"], long=dealers["long"],
-                           short_name=dealers["short_name"],
-                           st=dealers["st"], state=dealers["state"], zip=dealers["zip"])
+    dealer_obj = CarDealer(address=the_dealer["address"], city=the_dealer["city"], full_name=the_dealer["full_name"],
+                           id=the_dealer["id"], lat=the_dealer["lat"], long=the_dealer["long"],
+                           short_name=the_dealer["short_name"],
+                           st=the_dealer["st"],  zip=the_dealer["zip"])
 
     return dealer_obj
 
@@ -200,7 +187,20 @@ def get_dealer_reviews_from_cf(dealer_id):
             results.append(review_obj)
 
     return results
+# Function for making HTTP POST requests
+def post_request( json_payload, **kwargs):
+    
+    url = "https://apikey-v2-wztwzl2vqrjtynwzpmouki5qaykydaz5iygtyhkx3ht:40233ff7312d84b62b2a9ecc6e2b6496@b3da0739-66b0-434d-ac4e-a114108f111e-bluemix.cloudantnosqldb.appdomain.cloud/reviews/"
 
+    print(f"POST to {url}")
+    try:
+        response = requests.post(url, params=kwargs, json=json_payload)
+    except:
+        print("An error occurred while making POST request. ")
+    status_code = response.status_code
+    print(f"With status {status_code}")
+
+    return response
 
 # Create an `analyze_review_sentiments` method to call Watson NLU and analyze text
 # def analyze_review_sentiments(text):

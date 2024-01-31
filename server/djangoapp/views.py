@@ -10,7 +10,7 @@ from django.contrib import messages
 from datetime import datetime
 import logging
 import json
-from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf, get_dealer_by_id
+from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf, get_dealer_by_id, post_request
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
@@ -172,7 +172,7 @@ def add_review(request, dealer_id):
             json_payload = {"review": review}  # Create a JSON payload that contains the review data
 
             # Performing a POST request with the review
-            result = post_request(json_payload, dealer_id)
+            result = post_request(json_payload)
             if int(result.status_code) == 200:
                 print("Review posted successfully.")
 
