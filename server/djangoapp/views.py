@@ -3,13 +3,14 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 # from .models import related models
+from .models import CarDealer, DealerReview, CarModel
 # from .restapis import related methods
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
 import logging
 import json
-from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf
+from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf, get_dealer_by_id
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
@@ -143,7 +144,7 @@ def add_review(request, dealer_id):
             # Get dealer details from the API
             context = {
                 "cars": CarModel.objects.all(),
-                "dealer": get_dealer_by_id(dealer_id=dealer_id),
+                "dealer": get_dealer_by_id(dealer_id),
             }
             return render(request, 'djangoapp/add_review.html', context)
 
@@ -171,7 +172,7 @@ def add_review(request, dealer_id):
             json_payload = {"review": review}  # Create a JSON payload that contains the review data
 
             # Performing a POST request with the review
-            result = post_request(json_payload, dealerId=dealer_id)
+            result = post_request(json_payload, dealer_id)
             if int(result.status_code) == 200:
                 print("Review posted successfully.")
 

@@ -1,6 +1,6 @@
 import requests
 import json
-
+from .models import CarDealer, DealerReview
 from requests.auth import HTTPBasicAuth
 from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
@@ -74,8 +74,8 @@ def get_reviews_json_data(rev_id):
     for i in range(5):
         id = ids[i]
         dealer = get_request(URL+id)
-        print(dealer['id'])
-        print(dealers)
+        
+        
         if dealer['id'] == rev_id:
             dealers.append(dealer)
     return dealers
@@ -108,13 +108,26 @@ def get_dealers_from_cf( **kwargs):
 # Requires the dealer_id parameter with only a single value
 def get_dealer_by_id(dealer_id):
     # Call get_request with the dealer_id param
-    dealer = get_reviews_data_request(dealerId=dealer_id)
+    URL = "https://apikey-v2-wztwzl2vqrjtynwzpmouki5qaykydaz5iygtyhkx3ht:40233ff7312d84b62b2a9ecc6e2b6496@b3da0739-66b0-434d-ac4e-a114108f111e-bluemix.cloudantnosqldb.appdomain.cloud/reviews/"
+    result = get_request(URL+'_all_docs')
+    rows = result['rows']
+    dealers = []
+    ids = []
+    for i in range(5):
+        ids.append(rows[i]['id'])
+    for i in range(5):
+        id = ids[i]
+        dealer = get_request(URL+id)
+        
+        
+        if dealer['id'] == rev_id:
+            dealers.append(dealer)
 
     # Create a CarDealer object from response
-    dealer_obj = CarDealer(address=dealer["address"], city=dealer["city"], full_name=dealer["full_name"],
-                           id=dealer["id"], lat=dealer["lat"], long=dealer["long"],
-                           short_name=dealer["short_name"],
-                           st=dealer["st"], state=dealer["state"], zip=dealer["zip"])
+    dealer_obj = CarDealer(address=dealers["address"], city=dealers["city"], full_name=dealers["full_name"],
+                           id=dealers["id"], lat=dealers["lat"], long=dealers["long"],
+                           short_name=dealers["short_name"],
+                           st=dealers["st"], state=dealers["state"], zip=dealers["zip"])
 
     return dealer_obj
 
