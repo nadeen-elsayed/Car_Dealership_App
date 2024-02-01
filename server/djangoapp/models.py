@@ -1,4 +1,5 @@
 import sys
+import datetime
 from django.utils.timezone import now
 try:
     from django.db import models
@@ -36,24 +37,38 @@ class CarMake(models.Model):
 # - __str__ method to print a car make object
 
 class CarModel(models.Model):
-    SUV = 'SUV'
-    SEDAN = 'Sedan'
-    WAGON = 'Wagon'
-    CAR_CHOICES = [
-        (SUV, 'SUV'),
-        (SEDAN, 'Sedan'),
-        (WAGON, 'Wagon')
-    ]
-    car_type = models.CharField(
-        null=False,
-        max_length=20,
-        choices=CAR_CHOICES,
-        default=SUV
-    )
-    name = models.CharField(null=False, max_length=30, default='none')
-    dealer_id =models.IntegerField()
     car_make = models.ForeignKey(CarMake, null=True, on_delete=models.CASCADE)
-    year = models.DateField(null=True)
+    name = models.CharField(null=False, max_length=50)
+    dealer_id = models.IntegerField(null=True)
+
+    SEDAN = "Sedan"
+    SUV = "SUV"
+    WAGON = "Wagon"
+    SPORT = "Sport"
+    COUPE = "Coupe"
+    MINIVAN = "Mini"
+    VAN = "Van"
+    PICKUP = "Pickup"
+    TRUCK = "Truck"
+    BIKE = "Bike"
+    SCOOTER = "Scooter"
+    OTHER = "Other"
+    CAR_CHOICES = [(SEDAN, "Sedan"), (SUV, "SUV"), (WAGON, "Station wagon"), (SPORT, "Sports Car"),
+                   (COUPE, "Coupe"), (MINIVAN, "Mini van"), (VAN,
+                                                             "Van"), (PICKUP, "Pick-up truck"),
+                   (TRUCK, "Truck"), (BIKE, "Motor bike"), (SCOOTER, "Scooter"), (OTHER, 'Other')]
+    model_type = models.CharField(
+        null=False, max_length=15, choices=CAR_CHOICES, default=SEDAN)
+
+    YEAR_CHOICES = []
+    for r in range(1969, (datetime.datetime.now().year+1)):
+        YEAR_CHOICES.append((r, r))
+
+    year = models.IntegerField(
+        ('year'), choices=YEAR_CHOICES, default=datetime.datetime.now().year)
+
+    def __str__(self):
+        return self.name + ", " + str(self.year) + ", " + self.model_type
 
         # Create a toString method for object string representation
     def __str__(self):

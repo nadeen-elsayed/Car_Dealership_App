@@ -155,24 +155,32 @@ def add_review(request, dealer_id):
             review["name"] = f"{request.user.first_name} {request.user.last_name}"
             review["dealership"] = dealer_id
             review["review"] = form["content"]
+            review['id'] = dealer_id
             review["purchase"] = form.get("purchasecheck")
             if review["purchase"]:
-                review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
+                review["purchase"] = 'yes'
+            else:
+                review["purchase"] = 'No'
+
             car = CarModel.objects.get(pk=form["car"])
             review["car_make"] = car.car_make.name
             review["car_model"] = car.name
             review["car_year"] = car.year
-            
-            # If the user bought the car, get the purchase date
+             # If the user bought the car, get the purchase date
             if form.get("purchasecheck"):
-                review["purchase_date"] = datetime.strptime(form.get("purchasedate"), "%m/%d/%Y").isoformat()
+                review["purchase_date"] = form.get("purchasedate")
+                
             else: 
                 review["purchase_date"] = None
 
-            json_payload = {"review": review}  # Create a JSON payload that contains the review data
+            
+            
 
+            if(review):
+                result = post_request(review) # Create a JSON payload that contains the review data
+           
             # Performing a POST request with the review
-            result = post_request(json_payload)
+            
             if int(result.status_code) == 200:
                 print("Review posted successfully.")
 
