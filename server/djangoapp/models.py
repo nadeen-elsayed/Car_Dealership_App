@@ -70,35 +70,25 @@ class CarModel(models.Model):
     def __str__(self):
         return self.name + ", " + str(self.year) + ", " + self.model_type
 
-        # Create a toString method for object string representation
-    def __str__(self):
-        return "Car Name: " + self.name + " Car Type: " + self.car_type 
-# <HINT> Create a plain Python class `CarDealer` to hold dealer data
+       
 
+# A plain Python class to hold dealer data
 class CarDealer:
-
-    def __init__(self, address, city, full_name, id, lat, long, short_name, st, zip):
-        # Dealer address
+    def __init__(self, address, city, full_name, id, lat, long, short_name, st, state, zip):
         self.address = address
-        # Dealer city
         self.city = city
-        # Dealer Full Name
-        self.full_name = full_name
-        # Dealer id
-        self.id = id
-        # Location lat
+        self.full_name = full_name  # Full name of dealership
+        self.id = id  # Dealership id
         self.lat = lat
-        # Location long
         self.long = long
-        # Dealer short name
         self.short_name = short_name
-        # Dealer state
-        self.st = st
-        # Dealer zip
+        self.st = st  # State alpha code
+        self.state = state  # Full state name
         self.zip = zip
+        self.idx = 0
 
     def __str__(self):
-        return "Dealer name: " + self.full_name
+        return self.full_name + ", " + self.state
 
 # A plain Python class to hold review data
 class DealerReview:
