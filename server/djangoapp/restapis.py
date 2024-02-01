@@ -114,7 +114,7 @@ def get_dealer_by_id(dealer_id):
     dealer_obj = CarDealer(address=the_dealer["address"], city=the_dealer["city"], full_name=the_dealer["full_name"],
                            id=the_dealer["id"], lat=the_dealer["lat"], long=the_dealer["long"],
                            short_name=the_dealer["short_name"],
-                           st=the_dealer["st"],  zip=the_dealer["zip"])
+                           st=the_dealer["st"],  zip=the_dealer["zip"], state=the_dealer['state'])
 
     return dealer_obj
 
