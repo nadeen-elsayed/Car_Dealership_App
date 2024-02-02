@@ -17,8 +17,6 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 
-def static_pages(request):
-    return render(request, 'djangoapp/static.html')
 
 
 

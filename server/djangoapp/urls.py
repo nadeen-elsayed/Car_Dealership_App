@@ -2,6 +2,7 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from . import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 app_name = 'djangoapp'
 urlpatterns = [
@@ -31,3 +32,6 @@ urlpatterns = [
 
     # path for add a review view
     path(route='dealer/<int:dealer_id>/add-review/', view=views.add_review, name="add_review")] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
