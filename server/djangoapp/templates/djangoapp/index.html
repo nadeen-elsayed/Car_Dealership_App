@@ -2,8 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dealership Review</title>
+    <title>Best Car</title>
     {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
     <link rel="stylesheet" href="{% static '/admin/css/main.css' %}" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -12,6 +22,12 @@
     <link href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css" rel="stylesheet">
     <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+    <!-- Fontawesome icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;600&display=swap" rel="stylesheet">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
@@ -19,91 +35,266 @@
     
     <!--Add a nav bar here -->
     
-    <nav class="navbar navbar-expand-lg navbar-light ">
-        <a class="navbar-brand" href="#">Best Cars</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact">Contact US</a>
-            </li>
-          
+    
+
+      <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-dark " style="padding-top: 2rem;">
+          <a class="navbar-brand" id="logo" href="#">Best Cars</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact">Contact US</a>
+              </li>
             
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-                
-        </li>
-        {% if user.is_authenticated %}
-        <li>
-            <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
-            <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
-        </li>
-        {% else %}
-        <li>
-            <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
-                {% csrf_token %}
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Username" name="username" >
-                    <input type="password" class="form-control" placeholder="Password" name="psw" >
-                    <button class="btn btn-primary" type="submit">Login</button>
-                    <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
-                </div>
-            </form>
-        </li>
-        {% endif %}
-    </ul>
+              
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                  
+          </li>
+          {% if user.is_authenticated %}
+          <li>
+              <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+              <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li>
+              <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
+                  {% csrf_token %}
+                  <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Username" name="username" >
+                      <input type="password" class="form-control" placeholder="Password" name="psw" >
+                      <button class="btn btn-primary btns"id='header_btn' type="submit">Login</button>
+                      <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                  </div>
+              </form>
+          </li>
+          {% endif %}
+      </ul>
+          </div>
+        </nav>
+      <div class="section__container header__container" id="home">
+        <div class="header__content">
+          <h1>We Are Qualified & Professional</h1>
+          <div class="header__btn">
+            <button class="btns" id="header_btn">Read More</button>
+          </div>
         </div>
-      </nav>
+      </div>
+    </header>
+
+    <section class="banner__container">
+      <div class="banner__card">
+        <h4>Satisfaction Guaranteed or Your Dent Back.</h4>
+      </div>
+      <div class="banner__card">
+        <h4>Caring For Your Car The Way You Would.</h4>
+      </div>
+      <div class="banner__image">
+        <img src="{{MEDIA_URL}}/banner.jpg" alt="banner" />
+      </div>
+    </section>
+
+  
+     <!-- Dealer table -->
+     <div class="dealers_section">
+      <div class="dealers_container section__container">
+        <p class="section__subheader">BEST DEALERSHIPS</p>
+        <h2 class="section__header">Our Dealerships</h2>
+        <p class="section__description">
+          We offer many dealerships to satisfy all your nneds.
+        </p>
+          <table class="table content-table" id="table" data-filter-control="true">
+              <thead>
+                  <tr>
+                      <th data-field="id">ID</th>
+                      <th data-field="name">Dealer Name</th>
+                      <th data-field="city">City</th>
+                      <th data-field="address">Address</th>
+                      <th data-field="zip">Zip</th>
+                      <th data-field="state" data-filter-control="select" data-filter-default="All">State</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for dealer in dealerships %}
+                  <tr>
+                      <td>{{dealer.id}}</td>
+                      <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}} <i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
+                      <td>{{dealer.city}}</td>
+                      <td>{{dealer.address}}</td>
+                      <td>{{dealer.zip}}</td>
+                      <td>{{dealer.state}}</td>
+                      
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+    </div>
+
+
+    <section class="section__container price__container" id="price">
+      <p class="section__subheader">BEST PACKAGES</p>
+      <h2 class="section__header">Our Pricing Plans</h2>
+      <p class="section__description">
+        We offer a range of affordable and flexible pricing options.
+      </p>
+      <div class="price__grid">
+        <div class="price__card">
+          <h4>SILVER PACKAGE</h4>
+          <h3><sup>$</sup>35</h3>
+          <p>Routine Maintenance</p>
+          <p>Diagnostic Services</p>
+          <p>Wheel Alignment</p>
+          <p>Brake and Suspension</p>
+          <p>Air Conditioning</p>
+          <p>Scheduled Maintenance</p>
+          <button class="btns">Go Basic</button>
+        </div>
+        <div class="price__card">
+          <div class="price__card__ribbon">BESTSELLER</div>
+          <h4>PLATINUM PACKAGE</h4>
+          <h3><sup>$</sup>69</h3>
+          <p>Routine Maintenance</p>
+          <p>Diagnostic Services</p>
+          <p>Engine Tune-Ups</p>
+          <p>Tire Sales and Services</p>
+          <p>Exhaust System Repairs</p>
+          <p>Scheduled Maintenance</p>
+          <button class="btns">Go Premium</button>
+        </div>
+        <div class="price__card">
+          <h4>GOLD PACKAGE</h4>
+          <h3><sup>$</sup>39</h3>
+          <p>Routine Maintenance</p>
+          <p>Diagnostic Services</p>
+          <p>Brake and Suspension</p>
+          <p>Scheduled Maintenance</p>
+          <p>Wheel Alignment</p>
+          <p>Air Conditioning</p>
+          <button class="btns">Go Standard</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact">
+      <div class="section__container contact__container">
+        <div class="contact__content">
+          <p class="section__subheader">CONTACT US</p>
+          <h2 class="section__header">Imagine Your Car Feeling New Again</h2>
+          <p class="section__description">
+            Experience the magic of a rejuvenated ride as we pamper your car
+            with precision care, leaving it feeling as good as new.
+          </p>
+          <div class="contact__btns">
+            <button class="btns">Our Services</button>
+            <button class="btns">Contact Us</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
    
-  
+
+    <footer class="footer">
+      <div class="section__container subscribe__container">
+        <div class="subscribe__content">
+          <p class="section__subheader">OUR NEWSLETTER</p>
+          <h2 class="section__header">Subscribe To Our Newsletter</h2>
+          <p class="section__description">
+            Subscribe to our newsletter and receive exclusive content, expert
+            insights, and special offers delivered directly to your inbox.
+          </p>
+        </div>
+        <div class="subscribe__form">
+          <form action="/">
+            <input type="text" placeholder="Your Email" />
+            <button class="btns">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <div class="logo footer__logo">
+            <a href="#">Best Car</a>
+          </div>
+          <p class="section__description">
+            With a rich legacy spanning 25 years, our commitment to excellence
+            in car servicing is unwavering.
+          </p>
+          <ul class="footer__socials">
+            <li>
+              <a href="#"><i class="ri-facebook-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-google-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-instagram-line"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-youtube-line"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Our Services</h4>
+          <ul class="footer__links">
+            <li><a href="#">Skilled Mechanics</a></li>
+            <li><a href="#">Routine Maintenance</a></li>
+            <li><a href="#">Customized Solutions</a></li>
+            <li><a href="#">Competitive Pricing</a></li>
+            <li><a href="#">Satisfaction Guaranteed</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Contact Info</h4>
+          <ul class="footer__links">
+            <li>
+              <p>
+                Experience the magic of a rejuvenated ride as we pamper your car
+                with precision care
+              </p>
+            </li>
+            <li>
+              <p>Phone: <span>+91 9876543210</span></p>
+            </li>
+            <li>
+              <p>Email: <span>info@carserving.com</span></p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <div class="footer__bar">
+      
+    </div>
+
+    
     
   
     <!--Add a dealer table here -->
     {% block content %}
-    <h1 id="h11"></br>Our dealerships</h3>
-    <!-- Dealer table -->
-    <div class="container">
-        <table class="table" id="table" data-filter-control="true">
-            <thead>
-                <tr>
-                    <th data-field="id">ID</th>
-                    <th data-field="name">Dealer Name</th>
-                    <th data-field="city">City</th>
-                    <th data-field="address">Address</th>
-                    <th data-field="zip">Zip</th>
-                    <th data-field="state" data-filter-control="select" data-filter-default="All">State</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for dealer in dealerships %}
-                <tr>
-                    <td>{{dealer.id}}</td>
-                    <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}</a></td>
-                    <td>{{dealer.city}}</td>
-                    <td>{{dealer.address}}</td>
-                    <td>{{dealer.zip}}</td>
-                    <td>{{dealer.state}}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    
+   
     <!-- turn-on filter control for the table -->
     <script>
         $(function(){
             $('#table').bootstrapTable()
         })
     </script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="{% static '/js/main.js' %}"></script>
 {% endblock %}
     </body>
 

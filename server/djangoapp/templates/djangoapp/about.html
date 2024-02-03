@@ -1,59 +1,261 @@
-<html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>About</title>
-        {% load static %}
-        <link rel="stylesheet" href="{% static '/admin/css/about.css' %}" />
-        <link rel="stylesheet" href="{% static '/admin/css/main.css' %}" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Best Car</title>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="{% static '/admin/css/main.css' %}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <link href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css" rel="stylesheet">
-        <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
-        <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
-    </head>
+</head>
+
     <body>
-            <!--Add a nav bar here -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Best Cars</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about">About</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    
+    <!--Add a nav bar here -->
+    
+    
+
+      <header >
+        <nav class="navbar navbar-expand-lg navbar-light " style="padding-top: 1rem;">
+          <a class="navbar-brand" id="logo" href="#">Best Cars</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'djangoapp:about' %}">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'djangoapp:contact' %}">Contact US</a>
+              </li>
+            
+              
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                  
+          </li>
+          {% if user.is_authenticated %}
+          <li>
+              <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+              <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li>
+              <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
+                  {% csrf_token %}
+                  <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Username" name="username" >
+                      <input type="password" class="form-control" placeholder="Password" name="psw" >
+                      <button class="btn btn-primary btns" id="header_btn" type="submit">Login</button>
+                      <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                  </div>
+              </form>
+          </li>
+          {% endif %}
+      </ul>
+          </div>
+        </nav>
+     
+    </header>
+
+   
+    <h1 id="about_header">About Us</h1>
+    <section class="section__container experience__container" id="about">
+      <div class="experience__image">
+        <img src="{{MEDIA_URL}}/experience.jpg" alt="experience" />
+      </div>
+      <div class="experience__content">
+        <p class="section__subheader">WHO WE ARE</p>
+        <h2 class="section__header">
+          We Have 25 Years Of Experience In This Field
+        </h2>
+        <p class="section__description">
+          With a rich legacy spanning 25 years, our commitment to excellence in
+          car servicing is unwavering. Our seasoned team brings a wealth of
+          experience to ensure your vehicle receives top-notch care. Trust in
+          our expertise to keep your car running smoothly and safely.
+        </p>
+        <button class="btns">Read More</button>
+      </div>
+    </section>
+
+    <section class="service" id="service">
+      <div class="section__container service__container">
+        <p class="section__subheader">WHY CHOOSE US</p>
+        <h2 class="section__header">Great Car Service</h2>
+        <p class="section__description">
+          Trust us to keep your automobile running smoothly and reliably.
+        </p>
+        <div class="service__grid">
+          <div class="service__card">
+            <img src="{{MEDIA_URL}}/service-1.jpg" alt="service" />
+            <h4>Aligned Wheel</h4>
+            <p>
+              Experience smoother rides and extended tire life with our wheel
+              alignment service.
+            </p>
+          </div>
+          <div class="service__card">
+            <img src="{{MEDIA_URL}}/service-2.jpg" alt="service" />
+            <h4>Electrical system</h4>
+            <p>
+              Elevate car's electrical system to peak performance with our
+              specialized expertise.
+            </p>
+          </div>
+          <div class="service__card">
+            <img src="{{MEDIA_URL}}/service-3.jpg" alt="service" />
+            <h4>System Service</h4>
+            <p>
+              We utilize cutting-edge diagnostics and techniques to ensure
+              optimal condition.
+            </p>
+          </div>
+          <div class="service__card">
+            <img src="{{MEDIA_URL}}/service-4.jpg" alt="service" />
+            <h4>Engine Diagnostics</h4>
+            <p>
+              Unlock the secrets of your car's performance with state-of-the-art
+              diagnostic services.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="customisation">
+      <div class="section__container customisation__container">
+        <p class="section__subheader">OUR CUSTOMISATION</p>
+        <h2 class="section__header">
+          Car Serving Matched with Great Workmanship
+        </h2>
+        <p class="section__description">
+          Our dedicated team of skilled technicians and mechanics takes pride in
+          delivering top-tier servicing for your beloved vehicle.
+        </p>
+        <div class="customisation__grid">
+          <div class="customisation__card">
+            <h4>65</h4>
+            <p>Total Projects</p>
+          </div>
+          <div class="customisation__card">
+            <h4>165</h4>
+            <p>Transparency</p>
+          </div>
+          <div class="customisation__card">
+            <h4>463</h4>
+            <p>Done Projects</p>
+          </div>
+          <div class="customisation__card">
+            <h4>5063</h4>
+            <p>Got Awards</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="section__container subscribe__container">
+        <div class="subscribe__content">
+          <p class="section__subheader">OUR NEWSLETTER</p>
+          <h2 class="section__header">Subscribe To Our Newsletter</h2>
+          <p class="section__description">
+            Subscribe to our newsletter and receive exclusive content, expert
+            insights, and special offers delivered directly to your inbox.
+          </p>
+        </div>
+        <div class="subscribe__form">
+          <form action="/">
+            <input type="text" placeholder="Your Email" />
+            <button class="btns">Subscribe</button>
           </form>
         </div>
-      </nav>
-        <h1>
-            Welcome to Best Cars dealership, home to the best cars in North America. We sell domestic and imported cars at reasonable prices.
-        </h1>
+      </div>
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <div class="logo footer__logo">
+            <a href="#" id="logo">Best Cars</a>
+          </div>
+          <p class="section__description">
+            With a rich legacy spanning 25 years, our commitment to excellence
+            in car servicing is unwavering.
+          </p>
+          <ul class="footer__socials">
+            <li>
+              <a href="#"><i class="ri-facebook-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-google-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-instagram-line"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-youtube-line"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Our Services</h4>
+          <ul class="footer__links">
+            <li><a href="#">Skilled Mechanics</a></li>
+            <li><a href="#">Routine Maintenance</a></li>
+            <li><a href="#">Customized Solutions</a></li>
+            <li><a href="#">Competitive Pricing</a></li>
+            <li><a href="#">Satisfaction Guaranteed</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Contact Info</h4>
+          <ul class="footer__links">
+            <li>
+              <p>
+                Experience the magic of a rejuvenated ride as we pamper your car
+                with precision care
+              </p>
+            </li>
+            <li>
+              <p>Phone: <span>+91 9876543210</span></p>
+            </li>
+            <li>
+              <p>Email: <span>info@carserving.com</span></p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <div class="footer__bar">
+      
+    </div>
+
+    
+    
+  
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="{% static '/js/main.js' %}"></script>
+
     </body>
+
 </html>
