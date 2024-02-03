@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dealership Review</title>
+    <title>Best Cars</title>
     {% load static %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
@@ -10,7 +10,53 @@
     <body>
 
     <!--Add a nav bar here -->
-
+    <header >
+        <nav class="navbar navbar-expand-lg navbar-light " style="padding-top: 2rem;">
+          <a class="navbar-brand" href="#" id="logo">Best Cars</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact">Contact US</a>
+              </li>
+            
+              
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                  
+          </li>
+          {% if user.is_authenticated %}
+          <li>
+              <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+              <a class="btn btn-link " href="{% url 'djangoapp:logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li>
+              <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
+                  {% csrf_token %}
+                  <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Username" name="username" >
+                      <input type="password" class="form-control" placeholder="Password" name="psw" >
+                      <button class="btn btn-primary " id="header_btn" type="submit">Login</button>
+                      <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                  </div>
+              </form>
+          </li>
+          {% endif %}
+      </ul>
+          </div>
+        </nav>
+     
+    </header>
     <!-- Add reviews as cards -->
    
     {% block content %}
@@ -23,7 +69,7 @@
             <div class="card-columns">
                 {% for review in reviews %}
                     {% if review.car_make %}
-                    <div class="card" style="height: 300px; overflow: scroll; overflow-x: hidden;">
+                    <div class="card" >
                         <img src="{{MEDIA_URL}}/emoji/{{review.sentiment}}.png" class="card-img-left" style="float: left; height: 40px; width: 40px; display: inline-block;">
                         <div class="card-body" style="text-align: center;">
                             <h5 class="card-title" style="display: inline-block;">{{ review.car_make }}, {{ review.car_model }}</h5>
@@ -33,7 +79,7 @@
                     </div>
                     <!-- some review data may be missing , using default values-->
                     {% else %}
-                    <div class="card" style="height: 300px; overflow: scroll; overflow-x: hidden;">
+                    <div class="card" >
                         <img src="{{MEDIA_URL}}/emoji/{{review.sentiment}}.png" class="card-img-left" style="float: left; height: 40px; width: 40px; display: inline-block;">
                         <div class="card-body" style="text-align: center;">
                             <h5 class="card-title" style="display: inline-block;">Review</h5>
