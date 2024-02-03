@@ -5,6 +5,8 @@
     font-family: 'Source Sans Pro', sans-serif;
     text-decoration: none;
     color: white;
+    
+    
   }
   
   body{
@@ -12,6 +14,15 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    text-transform: uppercase;
+  }
+  body i {
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
   }
   a{
     color: white;
@@ -46,9 +57,9 @@
   }
   
   .form label{
-    display: block;
-    font-size: 13px;
-    letter-spacing: 3.5px;
+    display: block ; 
+    font-size: 16px;
+    letter-spacing: 3.2px;
     margin-bottom: 16px;
   }
   
@@ -82,7 +93,7 @@
     margin-bottom: 32px;
   }
   
-  .form .action input{
+  .form .action input, .form .action button{
     background: transparent;
     border-radius: 4px;
     border: 1px solid white;
@@ -96,7 +107,7 @@
     margin-right: 10px;
   }
   
-  .form .action input[type="submit"]{
+  .form .action button{
     background: white;
     color: black;
   }
@@ -116,7 +127,19 @@
   .form .half .item input:focus, form .full textarea:focus, form .action input[type="reset"]:hover, form .icons a:hover{
     background: rgba(255,255,255,0.075);
   }
+  select{
+    background-color: rgba(255,255,255,0.075);
+    border: 1px solid white;
+  }
+  option{
+    background-color: rgba(255,255,255,0.075);
+    color: black;
+  }
   
+  input{
+    background-color: rgba(255,255,255,0.075) !important;
+    border: 2px solid white;
+  }
   @media (max-width: 480px){
     .form .half{
       flex-direction: column;

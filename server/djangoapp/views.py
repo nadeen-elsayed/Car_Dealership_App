@@ -125,7 +125,8 @@ def get_dealer_details(request, dealer_id):
         reviews = get_dealer_reviews_from_cf(dealer_id=dealer_id)
         context = {
             "reviews":  reviews, 
-            "dealer_id": dealer_id
+            "dealer_id": dealer_id,
+            "dealer": get_dealer_by_id(dealer_id),
         }
 
         return render(request, 'djangoapp/dealer_details.html', context)
