@@ -27,7 +27,7 @@ DEBUG = True
 
 APPEND_SLASH = True
 
-ALLOWED_HOSTS = ['127.0.0.1','<Your app URL>']
+ALLOWED_HOSTS = ['*','<Your app URL>']
 
 CSRF_TRUSTED_ORIGINS = ['<Your app URL>']
 
