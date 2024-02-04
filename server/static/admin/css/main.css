@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
+
+
+
 :root {
+
   --primary-color: #da042a;
   --primary-color-dark: #c00427;
   --secondary-color: #15151f;
@@ -9,13 +13,47 @@
   --extra-light: #f8f7fd;
   --white: #ffffff;
   --max-width: 1200px;
-}
+  --pale-purple-pantone: hsl(262, 63%, 92%);
+  --medium-sea-green: hsl(152, 63%, 43%);
+  --lavender-blush: hsl(336, 35%, 92%);
+  --carolina-blue: hsl(204, 91%, 53%);
+  --columbia-blue: hsl(204, 92%, 90%);
+  --alice-blue-1: hsl(216, 38%, 95%);
+  --alice-blue-2: hsl(216, 75%, 97%);
+  --alice-blue-3: hsl(216, 38%, 95%);
+  --alice-blue-4: hsl(217, 33%, 92%);
+  --independence: hsl(219, 21%, 39%);
+  --deep-cerise: hsl(329, 63%, 52%);
+  --eerie-black: hsl(210, 11%, 15%);
+  --space-cadet: hsl(240, 22%, 25%);
+  --blue-jeans: hsl(204, 80%, 63%);
+  --slate-blue: hsl(262, 60%, 57%);
+  --beau-blue: hsl(208, 86%, 92%);
+  --honey-dew: hsl(152, 48%, 89%);
+  --mimi-pink: hsl(329, 63%, 90%);
+  --red-salsa: hsl(0, 79%, 63%);
+  --sapphire: hsl(211, 100%, 35%);
+  --manatee: hsl(219, 14%, 60%);
+  --white: hsl(0, 0%, 100%);
 
+  --gradient: linear-gradient(to top, var(--alice-blue-2), var(--alice-blue-3));
+}
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   
+}
+html {
+  font-family: var(--ff-open-sans);
+  color: var(--eerie-black);
+  
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--alice-blue-1);
+  overflow-x: hidden;
 }
 
 .section__container {
@@ -27,14 +65,14 @@
 .section__subheader {
   font-size: 1rem;
   font-weight: 500;
-  color: var(--primary-color);
+  color: var(--carolina-blue);
 }
 
 .section__header {
   font-size: 2.5rem;
   font-weight: 700;
   line-height: 3.5rem;
-  color: var(--secondary-color-dark);
+  color: var(--eerie-black);;
 }
 
 .section__description {
@@ -46,7 +84,7 @@
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   color: var(--white);
-  background-color: var(--primary-color);
+  background-color: var(--carolina-blue);;
   outline: none;
   border: none;
   border-radius: 5px;
@@ -56,7 +94,7 @@
 #header_btn{
     
     color: var(--white);
-    background-color: var(--primary-color);
+    background-color: var(--carolina-blue);;
     outline: none;
     border: none;
     border-radius: 5px;
@@ -64,19 +102,20 @@
     cursor: pointer;
 }
 #header_btn:hover {
-    background-color: var(--primary-color-dark);
+    background-color: var(--sapphire);
   }
 
 #logo{
-  color: var(--primary-color-dark);
+  color: var(--carolina-blue);;
   font-size: 1.7rem;
   font-weight: bold;
+  padding-left: 2rem;
 }
 .nav-link{
   font-size: 1.2rem;
 }
 .btns:hover {
-  background-color: var(--primary-color-dark);
+  background-color: var(--sapphire);
 }
 
 img {
@@ -89,7 +128,7 @@ img {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important
 }
 
 ul {
@@ -245,7 +284,7 @@ table td{
   margin: auto;
 }
 #about_header{
-  color: var(--primary-color);
+  color: var(--carolina-blue);;
   font-size: 3rem;
   display: flex;
   width: fit-content;
@@ -339,9 +378,19 @@ table td{
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
   transition: 0.3s;
 }
-
+a, a:hover{
+  text-decoration: none;
+}
+.price__card a{
+  color: white;
+  text-decoration: none;
+}
+.price__card a:hover{
+  color: white;
+  text-decoration: none;
+}
 .price__card:hover {
-  border-color: var(--primary-color);
+  border-color: var(--carolina-blue);;
   background-color: var(--extra-light);
 }
 
@@ -354,7 +403,7 @@ table td{
   padding: 5px 5rem;
   font-size: 0.9rem;
   color: var(--white);
-  background-color: var(--primary-color);
+  background-color: var(--carolina-blue);;
   transition: 0.3s;
 }
 
@@ -383,7 +432,7 @@ table td{
 }
 
 .price__card:hover h3 {
-  color: var(--primary-color);
+  color: var(--carolina-blue);;
 }
 
 .price__card p {
@@ -456,7 +505,7 @@ table td{
 .testimonial__card h4 {
   font-size: 1.2rem;
   font-weight: 500;
-  color: var(--primary-color);
+  color: var(--carolina-blue);;
 }
 
 .footer {
@@ -515,7 +564,7 @@ table td{
 }
 
 .footer__socials a:hover {
-  color: var(--primary-color);
+  color: var(--carolina-blue);;
   background-color: var(--white);
 }
 

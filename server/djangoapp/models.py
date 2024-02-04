@@ -20,7 +20,7 @@ import uuid
 
 class CarMake(models.Model):
     name = models.CharField(null=False, max_length=30, default='none')
-    desc = models.CharField(null=False, max_length=30, default='none')
+    desc = models.CharField(null=False, max_length=300, default='none')
     
     
     # Create a toString method for object string representation
@@ -40,6 +40,7 @@ class CarModel(models.Model):
     car_make = models.ForeignKey(CarMake, null=True, on_delete=models.CASCADE)
     name = models.CharField(null=False, max_length=50)
     dealer_id = models.IntegerField(null=True)
+    car_img = models.ImageField() 
 
     SEDAN = "Sedan"
     SUV = "SUV"
@@ -52,11 +53,13 @@ class CarModel(models.Model):
     TRUCK = "Truck"
     BIKE = "Bike"
     SCOOTER = "Scooter"
+    LUXURY = 'Luxury Car'
+    Electric = 'Electric Car'
     OTHER = "Other"
     CAR_CHOICES = [(SEDAN, "Sedan"), (SUV, "SUV"), (WAGON, "Station wagon"), (SPORT, "Sports Car"),
                    (COUPE, "Coupe"), (MINIVAN, "Mini van"), (VAN,
                                                              "Van"), (PICKUP, "Pick-up truck"),
-                   (TRUCK, "Truck"), (BIKE, "Motor bike"), (SCOOTER, "Scooter"), (OTHER, 'Other')]
+                   (TRUCK, "Truck"), (BIKE, "Motor bike"), (SCOOTER, "Scooter"),(LUXURY, 'Luxury Car'),(Electric, 'Electric Car'), (OTHER, 'Other')]
     model_type = models.CharField(
         null=False, max_length=15, choices=CAR_CHOICES, default=SEDAN)
 

@@ -9,6 +9,7 @@
   width: 90%;
   margin: auto;
   padding-top: 3rem;
+  padding-bottom: 5rem;
 }
 .reviews_cont_header{
   width: 90%;
@@ -23,7 +24,7 @@
 }
 .review{
   border: none;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 9px hsla(240, 14%, 69%, 0.2);
   transition: 0.3s;
   padding: 0.5rem;
   padding-top: 1rem;
@@ -36,10 +37,12 @@
   cursor: pointer;
   height: 210px;
   border-top: 5px solid #f8f7fd;
+  background-color: linear-gradient(to top, hsl(216, 75%, 97%), hsl(216, 38%, 95%));
 }
 .review:hover {
-  border-color: #da042a;
-  background-color: #f8f7fd;
+  border-color: hsl(204, 91%, 53%);
+  background-color: hsl(216, 38%, 95%);
+  
 }
 .review_header{
   

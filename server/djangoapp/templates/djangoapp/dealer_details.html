@@ -5,15 +5,25 @@
     <title>Best Cars</title>
     {% load static %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
     <link rel="stylesheet" href="{% static '/admin/css/dealer_details.css' %}" />
+   
     <link rel="stylesheet" href="{% static '/admin/css/main.css' %}" />
+    <link rel="stylesheet" href="{% static '/admin/css/cars_cont.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;600&display=swap" rel="stylesheet">  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    
 </head>
 
     <body>
 
     <!--Add a nav bar here -->
     <header >
-        <nav class="navbar navbar-expand-lg navbar-light " style="padding-top: 0.5rem;">
+        <nav class="navbar navbar-expand-lg navbar-light " style="padding-top: 0.5rem; padding-bottom: 1rem;">
           <a class="navbar-brand" href="#" id="logo">BestCars</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,10 +35,10 @@
                 <a class="nav-link" href="{% url 'djangoapp:get_dealerships' %}">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about">About</a>
+                <a class="nav-link" href="{% url 'djangoapp:get_dealerships' %}">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact">Contact US</a>
+                <a class="nav-link" href="{% url 'djangoapp:contact' %}">Contact US</a>
               </li>
             
               
@@ -38,8 +48,8 @@
           </li>
           {% if user.is_authenticated %}
           <li>
-              <a class="btn btn-link" href="#" style="color:#da042a">{{ user.first_name }}({{ user.username }})</a>
-              <a class="btn btn-link " href="{% url 'djangoapp:logout' %}" style="color:#da042a">Logout</a>
+              <a class="btn btn-link" href="#" style="color:hsl(204, 91%, 53%)">{{ user.first_name }}({{ user.username }})</a>
+              <a class="btn btn-link " href="{% url 'djangoapp:logout' %}" style="color:hsl(204, 91%, 53%)">Logout</a>
           </li>
           {% else %}
           <li>
@@ -49,7 +59,7 @@
                       <input type="text" class="form-control" placeholder="Username" name="username" >
                       <input type="password" class="form-control" placeholder="Password" name="psw" >
                       <button class="btn btn-primary " id="header_btn" type="submit">Login</button>
-                      <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                      <a class="btn btn-link" href="{% url 'djangoapp:registration' %}" style="color: hsl(204, 91%, 53%);">Sign Up</a>
                   </div>
               </form>
           </li>
@@ -59,16 +69,106 @@
         </nav>
      
     </header>
+    
+    
+    
+    
+      <!-- 
+        - #FEATURED CAR
+      -->
+
+      <section class="section featured-car" id="featured-car">
+        <div class="container" style="padding-top: 0.5rem;">
+
+          <div class="title-wrapper">
+            <h2 class="h2 section-title">Featured cars</h2>
+
+            <a href="#" class="featured-car-link">
+              <span>View more</span>
+
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </a>
+          </div>
+
+          <ul class="featured-car-list">
+            {% for car in cars %}
+            <li>
+              <div class="featured-car-card">
+
+                <figure class="card-banner">
+                  <img src="{{MEDIA_URL}}{{ car.car_img }}" alt="car-img" loading="lazy" width="440" height="300"
+                    class="w-100">
+                </figure>
+
+                <div class="card-content">
+
+                  <div class="card-title-wrapper">
+                    <h3 class="h3 card-title">
+                      <a href="#">{{car.car_make.name}} {{car.name}}</a>
+                    </h3>
+
+                    <data class="year" value="2021">{{ car.year }}</data>
+                  </div>
+
+                  <ul class="card-list">
+
+                    <li class="card-list-item">
+                      <ion-icon name="people-outline"></ion-icon>
+
+                      <span class="card-item-text">{{ car.model_type }}</span>
+                    </li>
+
+                    <li class="card-list-item">
+                      <ion-icon name="flash-outline"></ion-icon>
+
+                      <span class="card-item-text">Hybrid</span>
+                    </li>
+
+                    <li class="card-list-item">
+                      <ion-icon name="speedometer-outline"></ion-icon>
+
+                      <span class="card-item-text">6.1km / 1-litre</span>
+                    </li>
+
+                    <li class="card-list-item">
+                      <ion-icon name="hardware-chip-outline"></ion-icon>
+
+                      <span class="card-item-text">Automatic</span>
+                    </li>
+
+                  </ul>
+
+                  <div class="card-price-wrapper">
+                    <button class="btns">Rent now</button>
+                   
+                   
+
+                    
+
+                  </div>
+
+                </div>
+
+              </div>
+            </li>
+            {% endfor %}
+
+          </ul>
+
+        </div>
+      </section>
     <!-- Add reviews as cards -->
    <div class="reviews_cont">
     {% block content %}
         {% if reviews %}
-            {% if user.is_authenticated %}
+           
                 <div style="margin: 10px;" class="reviews_cont_header">
-                    <h1>Reviews for {{dealer.full_name}}</h1>
+                  <h1>Reviews for {{dealer.full_name}}</h1>
+                  {% if user.is_authenticated %}
                     <a class="btn btn-primary btns" href="{% url 'djangoapp:add_review' dealer_id %}"><b>Write a car review</b></a>
+                    {% endif %}
                 </div>
-            {% endif %}
+            
             <div class="card-columns">
                 {% for review in reviews %}
                     {% if review.car_make %}
@@ -76,7 +176,7 @@
                         <div class="review_header">
                             <img src="{{MEDIA_URL}}/emoji/{{review.sentiment}}.png" class="card-img-left" style="float: left; height: 40px; width: 40px; display: inline-block;">
                             <div class="review_title">
-                                <h6  style="display: inline-block;">{{ review.car_make }}-{{ review.car_model }}</h6>
+                                <h6  style="display: inline-block;">{{ review.car_make }} {{ review.car_model }}</h6>
                                 <h6>{{ review.car_year }}</h6>
                             </div>
                             
@@ -113,6 +213,76 @@
         {% endif %}
     {% endblock %}
     </div>
+    <footer class="footer">
+      <div class="section__container subscribe__container">
+        <div class="subscribe__content">
+          <p class="section__subheader">OUR NEWSLETTER</p>
+          <h2 class="section__header">Subscribe To Our Newsletter</h2>
+          <p class="section__description">
+            Subscribe to our newsletter and receive exclusive content, expert
+            insights, and special offers delivered directly to your inbox.
+          </p>
+        </div>
+        <div class="subscribe__form">
+          <form action="/">
+            <input type="text" placeholder="Your Email" />
+            <button class="btns">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <div class="logo footer__logo">
+            <a href="#" id="logo">BestCars</a>
+          </div>
+          <p class="section__description">
+            With a rich legacy spanning 25 years, our commitment to excellence
+            in car servicing is unwavering.
+          </p>
+          <ul class="footer__socials">
+            <li>
+              <a href="#"><i class="ri-facebook-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-google-fill"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-instagram-line"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="ri-youtube-line"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Our Services</h4>
+          <ul class="footer__links">
+            <li><a href="#">Skilled Mechanics</a></li>
+            <li><a href="#">Routine Maintenance</a></li>
+            <li><a href="#">Customized Solutions</a></li>
+            <li><a href="#">Competitive Pricing</a></li>
+            <li><a href="#">Satisfaction Guaranteed</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Contact Info</h4>
+          <ul class="footer__links">
+            <li>
+              <p>
+                Experience the magic of a rejuvenated ride as we pamper your car
+                with precision care
+              </p>
+            </li>
+            <li>
+              <p>Phone: <span>+91 9876543210</span></p>
+            </li>
+            <li>
+              <p>Email: <span>info@carserving.com</span></p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
     </body>
 
 </html>

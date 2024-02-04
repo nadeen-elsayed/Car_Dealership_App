@@ -127,6 +127,7 @@ def get_dealer_details(request, dealer_id):
             "reviews":  reviews, 
             "dealer_id": dealer_id,
             "dealer": get_dealer_by_id(dealer_id),
+            "cars": CarModel.objects.all()
         }
 
         return render(request, 'djangoapp/dealer_details.html', context)
