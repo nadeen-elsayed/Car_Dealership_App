@@ -52,8 +52,9 @@ Run the development server: </br>
 - ```python manage.py makemigrations djangoapp```
 - ```python manage.py migrate djangoapp```
 - ```python manage.py runserver```
+- Go the website by adding `/djangoapp` to the end of the url
 
 Create a new superuser:
 - ```python manage.py createsuperuser```
 - Log in via the admin site (just add `/admin` at the end of the url)
-- Go the website by adding `/djangoapp` to the end of the url
+
