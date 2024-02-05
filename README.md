@@ -6,7 +6,7 @@ The general idea is to build a website that allows users to select one of Best C
 
 **Prework: Sign up for IBM Cloud account and create a Watson Natural language Understanding service**
 1. Create an IBM cloud account.
-2. Create an instance of the Natural Language Understanding (NLU) service.
+2. Create an instance of the Natural Language Understanding (NLU) service.(It is used in analyzing the tone of customer reviews and determine whether the review is positive, negative, or neutral.)
 
 **Fork the project Github repository with a project then build and deploy the template project**
 1. Fork the repository in my account
